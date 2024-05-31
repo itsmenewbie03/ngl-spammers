@@ -70,6 +70,7 @@
           type="checkbox"
           class="toggle toggle-primary"
           on:click={toggle}
+          checked={random_messages}
         />
       </label>
       <!-- NOTE: We only show the message field if the user doesn't want random messages -->
