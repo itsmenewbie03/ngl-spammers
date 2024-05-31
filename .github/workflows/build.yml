@@ -58,7 +58,8 @@ jobs:
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: true
           prerelease: false
-          args: ${{ matrix.args }      - name: setup node
+          args: ${{ matrix.args }      
+      - name: setup node
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
