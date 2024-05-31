@@ -1,5 +1,6 @@
 <script lang="ts">
   import toast from "svelte-french-toast";
+  import { invoke } from "@tauri-apps/api/tauri";
 
   let target: string = "";
   let message: string = "";
@@ -21,7 +22,7 @@
     return /(?<=https:\/\/ngl\.link\/).*/.exec(url)?.[0];
   };
 
-  const start = (event: Event) => {
+  const start = async (event: Event) => {
     event.preventDefault();
     if (target === "") {
       toast.error("Please specify a target!");
@@ -43,6 +44,19 @@
     // INFO: we can now call rust here using tauri
     // for now we will just log what we have
     console.log({ username, message, count, random_messages });
+    const resp = await invoke("spam", {
+      target: username,
+      count: count,
+      random: random_messages,
+      message: message,
+    });
+    // TODO: we just tell TS to shut up coz why not?
+    // JK I will refactor this "later"
+    // @ts-ignore
+    const { message: msg, success, failed } = resp;
+    sent_count = parseInt(success);
+    failed_count = parseInt(failed);
+    toast(msg, { icon: "🛈" });
   };
 
   const toggle = (event: Event) => {
