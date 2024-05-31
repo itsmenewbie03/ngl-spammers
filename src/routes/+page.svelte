@@ -5,6 +5,7 @@
   let message: string = "";
   let count: number = 0;
   let sent_count: number = 0;
+  let failed_count: number = 0;
   let random_messages: boolean = false;
 
   const clear = (event: Event) => {
@@ -49,7 +50,7 @@
   };
 </script>
 
-<div class="flex w-full justify-center mt-8">
+<div class="flex w-full justify-center">
   <div class="card w-96 bg-base-100 shadow-xl bordered">
     <div class="card-body">
       <h2 class="text-4xl card-title">Let's get started!</h2>
@@ -101,19 +102,11 @@
           bind:value={count}
         />
       </label>
-
-      <label class="form-control w-full max-w-xs">
-        <div class="label">
-          <span class="label-text">Counter</span>
-        </div>
-        <input
-          type="text"
-          placeholder="Nothing is sent yet ..."
-          class="input input-bordered input-disabled w-full max-w-xs"
-          disabled
-          bind:value={sent_count}
-        />
-      </label>
+      <p class="text-xs text-center text-primary-500">
+        <span class="text-success">{sent_count} messages sent </span>
+        ┊
+        <span class="text-error">{failed_count} failed</span>
+      </p>
       <div class="card-actions justify-end">
         <button class="btn" on:click={clear}>Clear Form</button>
         <button class="btn btn-primary" on:click={start}>Start Spamming</button>
