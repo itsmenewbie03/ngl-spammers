@@ -31,14 +31,13 @@ async fn spam(
         });
     }
 
-    let msg = if random {
-        utils::get_random_message()
-    } else {
-        // NOTE: message can't be none here since we have a check above
-        message.unwrap().to_owned()
-    };
-
     for _x in 0..count {
+        let msg = if random {
+            utils::get_random_message()
+        } else {
+            // NOTE: message can't be none here since we have a check above
+            message.unwrap().to_owned()
+        };
         let success = ngl::send(target, &msg).await;
         if success {
             success_count += 1;
