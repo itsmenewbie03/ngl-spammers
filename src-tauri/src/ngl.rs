@@ -24,7 +24,7 @@ pub async fn send(target: &str, message: &str) -> bool {
     let body = RequestBody {
         username: target.to_owned(),
         question: message.to_owned(),
-        deviceId: "69186a25-cedd-4829-a92d-ee7718219cf".to_owned(),
+        deviceId: uuid,
         gameSlug: None,
         referrer: "https://l.facebook.com/".to_owned(),
     };
