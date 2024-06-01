@@ -16,3 +16,8 @@ pub fn get_random_message() -> String {
         .unwrap_or(&"Why are you gae?".to_owned())
         .to_owned()
 }
+
+pub fn get_random_uuid() -> String {
+    let uuid = uuid::Uuid::new_v4();
+    uuid.to_string()
+}
