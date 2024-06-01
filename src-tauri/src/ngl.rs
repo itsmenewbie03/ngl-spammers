@@ -1,6 +1,8 @@
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 
+use crate::utils;
+
 #[allow(non_snake_case)]
 #[derive(Serialize, Deserialize)]
 pub struct RequestBody {
@@ -12,7 +14,11 @@ pub struct RequestBody {
 }
 
 pub async fn send(target: &str, message: &str) -> bool {
-    println!("Target:  {} | Message: {}", target, message);
+    let uuid = utils::get_random_uuid();
+    println!(
+        "Target:  {} | Message: {} | UUID: {}",
+        target, message, uuid
+    );
     let url = "https://ngl.link/api/submit";
     let cli = Client::new();
     let body = RequestBody {
